@@ -1,6 +1,6 @@
 # Notebook
 
-## Scoop
+### Scoop
 ```sh
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
@@ -13,12 +13,12 @@ scoop bucket add extras
 ```sh
 scoop install 7zip adb ani-cli aria2 bat btop cacert curl ffmpeg fnm fzf gcc git googlechrome lua-language-server llvm localsend mingw mpv nano neovim obsidian ollama openssl raspberry-pi-imager starship tailscale tgpt tldr wget whatsapp winfetch yazi yt-dlp zoxide
 ```
-## Winget
+### Winget
 ```sh
 winget install MacPaw.Encrypto AdrienAllard.FileConverter FxSoundLLC.FxSound Flywheel.Local Microsoft.PowerToys KamilSzymborski.WindowCenteringHelper Debian.Debian 
 ```
 
-## Windows Updates
+### Windows Updates
 ```sh
 Install-Module PSWindowsUpdate
 Add-WUServiceManager -MicrosoftUpdate
@@ -32,13 +32,13 @@ Get-WindowsUpdate
 Install-WindowsUpdate -MicrosoftUpdate -AcceptAll -AutoReboot | Out-File "C:\($env.computername-Get-Date -f yyyy-MM-dd)-MSUpdates.log" -Force
 ```
 
-## Apps
+### Apps
 1. Apple Devices
 2. Office 2019 Home & Student
 3. Scan
 4. Zen
 
-## Portable Apps
+### Portable Apps
 1. ExifCleaner
 2. GIMP
 3. Inkscape
