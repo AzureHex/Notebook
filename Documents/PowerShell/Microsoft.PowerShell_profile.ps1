@@ -1,30 +1,44 @@
+#opt-out of telemetry before doing anything, only if PowerShell is run as admin
+if ([bool]([System.Security.Principal.WindowsIdentity]::GetCurrent()).IsSystem) {
+    [System.Environment]::SetEnvironmentVariable('POWERSHELL_TELEMETRY_OPTOUT', 'true', [System.EnvironmentVariableTarget]::Machine)
+}
+
 winfetch
 
 $ENV:STARSHIP_CONFIG = "$HOME\.config\starship\starship.toml"
 $ENV:STARSHIP_DISTRO = "  eyes"
 Invoke-Expression (&starship init powershell)
 
-# mpv
-function mpv {
-    & "C:\Users\eyes\scoop\apps\mpv\0.38.0\mpv.exe" @args
+# Quick Access to System Information
+function sysinfo { Get-ComputerInfo }
+
+# Networking Utilities
+function flushdns {
+	Clear-DnsClientCache
+	Write-Host "DNS has been flushed"
 }
 
-# vim
-function vim {
-    Start-Process "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Neovim\Neovim.lnk"
+# Navigation Shortcuts
+function desktop { Set-Location -Path $HOME\Desktop }
+function docs { Set-Location -Path $HOME\Documents }
+function repos {
+    Set-Location -Path "C:\Users\eyes\Code\repos"
 }
+
+# Enhanced Listing
+function ll { Get-ChildItem -Path . -Force -Hidden | Format-Table -AutoSize }
 
 # Aliasis
+Set-Alias la Get-ChildItem
+Set-Alias mkdir New-MultiDir
+Set-Alias ping Test-Connection
+Set-Alias ifconfig Get-NetIPAddress
 Set-Alias vim nvim
 Set-Alias code Open-FzfFile
 Set-Alias debian debian.exe
 
-Set-Alias la Get-ChildItem
-function la { Get-ChildItem -Force -File | Format-Table Name,Length,LastWriteTime }
-
-# Networking
-Set-Alias ping Test-Connection
-Set-Alias ifconfig Get-NetIPAddress
+# Public IP
+function Get-PubIP { (Invoke-WebRequest http://ifconfig.me/ip).Content }
 
 # IP Address Command
 function ip {
@@ -38,19 +52,23 @@ function ip {
     }
 }
 
+# which
+function which($name) {
+    Get-Command $name | Select-Object -ExpandProperty Definition
+}
 
-# fzf-code
-function Open-FzfFile {
-    # Search for all files in the current directory and its subdirectories
-    $files = Get-ChildItem -Recurse -File | Select-Object -ExpandProperty FullName
+# sed
+function sed($file, $find, $replace) {
+    (Get-Content $file).replace("$find", $replace) | Set-Content $file
+}
 
-    # Use fzf to let the user select a file
-    $selectedFile = $files | fzf
-
-    # Open the selected file in nvim
-    if ($selectedFile) {
-        nvim $selectedFile
+# grep
+function grep($regex, $dir) {
+    if ( $dir ) {
+        Get-ChildItem $dir | select-string $regex
+        return
     }
+    $input | select-string $regex
 }
 
 # touch
@@ -78,6 +96,34 @@ function New-MultiDir {
     }
 }
 
-# Create an alias for the function
-Set-Alias mkdir New-MultiDir
+# vim
+function vim {
+    Start-Process "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Neovim\Neovim.lnk"
+}
+
+# fzf-code
+function Open-FzfFile {
+    # Search for all files in the current directory and its subdirectories
+    $files = Get-ChildItem -Recurse -File | Select-Object -ExpandProperty FullName
+
+    # Use fzf to let the user select a file
+    $selectedFile = $files | fzf
+
+    # Open the selected file in nvim
+    if ($selectedFile) {
+        nvim $selectedFile
+    }
+}
+
+# unzip
+function unzip ($file) {
+    Write-Output("Extracting", $file, "to", $pwd)
+    $fullFile = Get-ChildItem -Path $pwd -Filter $file | ForEach-Object { $_.FullName }
+    Expand-Archive -Path $fullFile -DestinationPath $pwd
+}
+
+# mpv
+function mpv {
+    & "C:\Users\eyes\scoop\apps\mpv\0.38.0\mpv.exe" @args
+}
 
