@@ -46,14 +46,11 @@ Install-WindowsUpdate -MicrosoftUpdate -AcceptAll -AutoReboot | Out-File "C:\($e
 5. LibreOffice
 6. NVCleanInstall
 7. OBS Studio
-8. PowerToys
-9. Python
-10. RevoUninstaller
-11. Rufus
-12. SuperImage
-13. Syncthing
-14. Telegram
-15. Tor Browser
-16. Ventoy
-17. Windows Centering Helper
-18. Wireshark
+8. RevoUninstaller
+9. Rufus
+10. SuperImage
+11. Syncthing
+12. Telegram
+13. Tor Browser
+14. Ventoy
+15. Wireshark
