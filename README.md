@@ -10,7 +10,8 @@ Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
 scoop install 7zip adb ani-cli aria2 bat btop cacert curl ffmpeg fzf gcc git lua-language-server llvm localsend mingw mpv nano neovim o>
 ```
 
-```sh | Windows Updates
+## Windows Updates
+```sh
 Install-Module PSWindowsUpdate
 Add-WUServiceManager -MicrosoftUpdate
 ```
