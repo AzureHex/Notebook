@@ -1,28 +1,6 @@
 # Notebook
 
-### Scoop
-```sh
-Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
-Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
-```
-
-```sh
-scoop bucket add extras
-```
-
-```sh
-scoop install 7zip adb ani-cli aria2 bat btop cacert curl ffmpeg fnm fzf gcc git googlechrome lua-language-server llvm localsend mingw mpv nano neovim obsidian ollama openssl raspberry-pi-imager starship tailscale tgpt tldr wget whatsapp winfetch yazi yt-dlp zoxide
-```
-### Winget
-```sh
-winget install MacPaw.Encrypto AdrienAllard.FileConverter FxSoundLLC.FxSound Flywheel.Local Microsoft.PowerToys KamilSzymborski.WindowCenteringHelper Debian.Debian 
-```
-
-### Windows Updates
-```sh
-Install-Module PSWindowsUpdate
-Add-WUServiceManager -MicrosoftUpdate
-```
+### Check Windows Updates
 
 ```sh | Check for Updates
 Get-WindowsUpdate
