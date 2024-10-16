@@ -7,7 +7,11 @@ Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
 ```
 
 ```sh
-scoop install 7zip adb ani-cli aria2 bat btop cacert curl ffmpeg fzf gcc git lua-language-server llvm localsend mingw mpv nano neovim o>
+scoop bucket add extras
+```
+
+```sh
+scoop install 7zip adb ani-cli aria2 bat btop cacert curl ffmpeg fzf gcc git googlechrome lua-language-server llvm localsend mingw mpv nano neovim obsidian ollama openssl starship tailscale tgpt tldr wget whatsapp winfetch yazi yt-dlp zoxide
 ```
 
 ## Windows Updates
@@ -24,20 +28,18 @@ Get-WindowsUpdate
 Install-WindowsUpdate -MicrosoftUpdate -AcceptAll -AutoReboot | Out-File "C:\($env.computername-Get-Date -f yyyy-MM-dd)-MSUpdates.log" -Force
 ```
 
+## Winget
+```sh
+winget install -e --id MacPaw.Encrypto;winget install -e --id FxSoundLLC.FxSound;winget install -e --id LocalSend.LocalSend;winget install -e --id Obsidian.Obsidian;winget install -e --id WhatsApp.WhatsApp;winget install -e --id tailscale.tailscale
+```
+
 ## Apps
 1. Apple Devices
-2. Encrypto
-3. File Converter
-4. FxSound
-5. Local
-6. Google Chrome
-7. Obsidian
-8. Office 2019 Home & Student
-9. Ollama
-10. Scan
-11. Tailscale
-12. WhatsApp
-13. Zen
+2. File Converter
+3. Local
+4. Office 2019 Home & Student
+5. Scan
+6. Zen
 
 ## Portable Apps
 1. ExifCleaner
