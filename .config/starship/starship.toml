@@ -22,7 +22,7 @@ disabled = false
 # Shows the username
 [username]
 style_user = 'green bold'
-style_root = 'red bold'
+style_root = 'green bold'
 format = '[$user]($style) '
 disabled = false
 show_always = true
