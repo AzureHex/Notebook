@@ -32,11 +32,12 @@ Install-WindowsUpdate -MicrosoftUpdate -AcceptAll -AutoReboot | Out-File "C:\($e
 5. Local
 6. Google Chrome
 7. Obsidian
-8. Ollama
-9. Scan
-10. Tailscale
-11. WhatsApp
-12. Zen
+8. Office 2019 Home & Student
+9. Ollama
+10. Scan
+11. Tailscale
+12. WhatsApp
+13. Zen
 
 ## Portable Apps
 1. ExifCleaner
