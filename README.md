@@ -11,7 +11,11 @@ scoop bucket add extras
 ```
 
 ```sh
-scoop install 7zip adb ani-cli aria2 bat btop cacert curl ffmpeg fzf gcc git googlechrome lua-language-server llvm localsend mingw mpv nano neovim obsidian ollama openssl starship tailscale tgpt tldr wget whatsapp winfetch yazi yt-dlp zoxide
+scoop install 7zip adb ani-cli aria2 bat btop cacert curl ffmpeg fnm fzf gcc git googlechrome lua-language-server llvm localsend mingw mpv nano neovim obsidian ollama openssl raspberry-pi-imager starship tailscale tgpt tldr wget whatsapp winfetch yazi yt-dlp zoxide
+```
+## Winget
+```sh
+winget install MacPaw.Encrypto AdrienAllard.FileConverter FxSoundLLC.FxSound Flywheel.Local Microsoft.PowerToys KamilSzymborski.WindowCenteringHelper Debian.Debian 
 ```
 
 ## Windows Updates
@@ -28,18 +32,11 @@ Get-WindowsUpdate
 Install-WindowsUpdate -MicrosoftUpdate -AcceptAll -AutoReboot | Out-File "C:\($env.computername-Get-Date -f yyyy-MM-dd)-MSUpdates.log" -Force
 ```
 
-## Winget
-```sh
-winget install -e --id MacPaw.Encrypto;winget install -e --id FxSoundLLC.FxSound;winget install -e --id LocalSend.LocalSend;winget install -e --id Obsidian.Obsidian;winget install -e --id WhatsApp.WhatsApp;winget install -e --id tailscale.tailscale
-```
-
 ## Apps
 1. Apple Devices
-2. File Converter
-3. Local
-4. Office 2019 Home & Student
-5. Scan
-6. Zen
+2. Office 2019 Home & Student
+3. Scan
+4. Zen
 
 ## Portable Apps
 1. ExifCleaner
