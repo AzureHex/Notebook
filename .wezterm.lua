@@ -6,11 +6,11 @@ local config = wezterm.config_builder()
 
 config.font = wezterm.font("JetBrainsMono Nerd Font")
 config.font_size = 14
-config.color_scheme = 'Catppuccin Frappe' -- duskfox, Dracula (Official)
+config.color_scheme = 'Catppuccin Frappe' -- Catppuccin Frappe | Mocha | Macchiato, duskfox, Dracula (Official)
 config.enable_tab_bar = false
 config.allow_win32_input_mode = true
 config.default_prog = { 'pwsh.exe' }
-config.initial_cols = 116
+config.initial_cols = 132
 config.initial_rows = 32
 config.default_cursor_style = 'BlinkingBar'
 config.audible_bell = "SystemBeep"
@@ -28,7 +28,7 @@ config.command_palette_bg_color = "#44475a"  -- Customize background color
 config.font_shaper = "Harfbuzz"
 config.harfbuzz_features = { 'zero', 'liga=0', 'clig=0', 'calt=0' } 
 
-config.window_background_opacity = 0.97
+--config.window_background_opacity = 0.97
 --config.win32_system_backdrop = 'Acrylic' -- Acrylic, Mica, Tabbed
 --config.macos_window_background_blur = 20
 
@@ -42,7 +42,7 @@ config.window_padding = {
 -- Define the colors based on your preference
 config.colors = {
   foreground = "#c6d0f5",
-  background = "#3a3a3a",
+--  background = "#2e2e2e",
   cursor_bg = "#ffe4b5",  -- Set cursor background color
   cursor_fg = "#3a3a3a",  -- Set cursor foreground color (text)
   cursor_border = "#ffe4b5",  -- Set cursor border color
@@ -53,3 +53,4 @@ config.colors = {
   }
 
 return config
+

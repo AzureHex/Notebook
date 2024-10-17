@@ -8,7 +8,7 @@ Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
 scoop bucket add extras
 
 # Install the specified applications from Scoop
-scoop install 7zip adb ani-cli aria2 bat btop cacert curl ffmpeg fnm fzf gcc git googlechrome lua-language-server llvm localsend mingw mpv nano neovim obsidian ollama openssl raspberry-pi-imager starship tailscale tgpt tldr wget whatsapp winfetch yazi yt-dlp zoxide
+scoop install 7zip adb ani-cli aria2 bat btop cacert curl eza ffmpeg fnm fzf gcc git googlechrome grep lua-language-server llvm localsend mingw mpv nano neovim obsidian ollama openssl raspberry-pi-imager sed starship tailscale tgpt tldr wezterm wget whatsapp winfetch yazi yt-dlp zoxide
 
 # Install the specified applications using Winget
 winget install MacPaw.Encrypto AdrienAllard.FileConverter FxSoundLLC.FxSound Flywheel.Local Microsoft.PowerToys KamilSzymborski.WindowCenteringHelper Debian.Debian
