@@ -4,6 +4,9 @@ local wezterm = require("wezterm")
 -- This will hold the configuration.
 local config = wezterm.config_builder()
 
+config.automatically_reload_config = true
+config.check_for_updates = false
+bold_brightens_ansi_colors = true
 config.font = wezterm.font("JetBrainsMono Nerd Font")
 config.font_size = 14
 config.color_scheme = 'Catppuccin Frappe' -- Catppuccin Frappe | Mocha | Macchiato, duskfox, Dracula (Official)
@@ -25,8 +28,8 @@ config.window_decorations = "INTEGRATED_BUTTONS|RESIZE" -- RESIZE, TITLE, NONE
 config.command_palette_font_size = 12
 config.command_palette_fg_color = "#ffffff"  -- Customize foreground color
 config.command_palette_bg_color = "#44475a"  -- Customize background color
-config.font_shaper = "Harfbuzz"
-config.harfbuzz_features = { 'zero', 'liga=0', 'clig=0', 'calt=0' } 
+--config.font_shaper = "Harfbuzz"
+--config.harfbuzz_features = { 'zero', 'liga=0', 'clig=0', 'calt=0' } 
 
 --config.window_background_opacity = 0.97
 --config.win32_system_backdrop = 'Acrylic' -- Acrylic, Mica, Tabbed
@@ -53,4 +56,3 @@ config.colors = {
   }
 
 return config
-
