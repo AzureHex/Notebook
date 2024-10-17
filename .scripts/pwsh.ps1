@@ -11,7 +11,7 @@ scoop bucket add extras
 scoop install 7zip adb ani-cli aria2 bat btop cacert curl eza ffmpeg fnm fzf gcc git googlechrome grep lua-language-server llvm localsend mingw mpv nano neovim obsidian ollama openssl raspberry-pi-imager sed starship tailscale tgpt tldr wezterm wget whatsapp winfetch yazi yt-dlp zoxide
 
 # Install the specified applications using Winget
-winget install MacPaw.Encrypto AdrienAllard.FileConverter FxSoundLLC.FxSound Flywheel.Local Microsoft.PowerToys KamilSzymborski.WindowCenteringHelper Debian.Debian
+winget install Mozilla.Thunderbird MacPaw.Encrypto AdrienAllard.FileConverter FxSoundLLC.FxSound Flywheel.Local Microsoft.PowerToys KamilSzymborski.WindowCenteringHelper Debian.Debian
 
 # Install the PSWindowsUpdate module
 Install-Module PSWindowsUpdate -Force
