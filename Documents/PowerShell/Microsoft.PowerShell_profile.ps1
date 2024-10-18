@@ -8,6 +8,7 @@ winfetch
 $ENV:STARSHIP_CONFIG = "$HOME\.config\starship\starship.toml"
 $ENV:STARSHIP_DISTRO = "  eyes"
 Invoke-Expression (&starship init powershell)
+$env:BAT_THEME = 'Nord'
 
 # Quick Access to System Information
 function sysinfo { Get-ComputerInfo }
@@ -21,21 +22,41 @@ function flushdns {
 # Navigation Shortcuts
 function desktop { Set-Location -Path $HOME\Desktop }
 function docs { Set-Location -Path $HOME\Documents }
-function repos {
-    Set-Location -Path "C:\Users\eyes\Code\repos"
-}
+function repos { Set-Location -Path "C:\Users\eyes\Code\repos" }
+function .config { Set-Location -Path "C:\Users\eyes\.config" }
 
 # Enhanced Listing
 function ll { Get-ChildItem -Path . -Force -Hidden | Format-Table -AutoSize }
 
 # Aliasis
-Set-Alias la Get-ChildItem
+Set-Alias ls exa
 Set-Alias mkdir New-MultiDir
 Set-Alias ping Test-Connection
 Set-Alias ifconfig Get-NetIPAddress
 Set-Alias vim nvim
 Set-Alias code Open-FzfFile
 Set-Alias debian debian.exe
+
+# nvims
+function nvims()
+{
+  $items = "Nvim", "AstroNvim", "LazyVim", "NvChad"
+  $config = $items | fzf --prompt=" Neovim Config " --height=~50% --layout=reverse --border --exit-0
+
+  if ([string]::IsNullOrEmpty($config))
+  {
+    Write-Output "Nothing selected"
+    break
+  }
+ 
+  if ($config -eq "default")
+  {
+    $config = ""
+  }
+
+  $env:NVIM_APPNAME=$config
+  nvim $args
+}
 
 # Public IP
 function Get-PubIP { (Invoke-WebRequest http://ifconfig.me/ip).Content }
