@@ -5,7 +5,7 @@ format = '''
 #right_format = "$package$cmd_duration" # move the rest of the prompt to the right
 
 #palette = "catppuccin_mocha"
-add_newline = true # Inserts a blank line between shell prompts
+#add_newline = true # Inserts a blank line between shell prompts
 command_timeout = 1000
 
 # Configure the command duration module to display only for durations exceeding 2 seconds
@@ -22,7 +22,7 @@ disabled = false
 # Shows the username
 [username]
 style_user = 'green bold'
-style_root = 'green bold'
+style_root = 'red bold'
 format = '[$user]($style) '
 disabled = false
 show_always = true

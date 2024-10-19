@@ -3,7 +3,7 @@ if ([bool]([System.Security.Principal.WindowsIdentity]::GetCurrent()).IsSystem) 
     [System.Environment]::SetEnvironmentVariable('POWERSHELL_TELEMETRY_OPTOUT', 'true', [System.EnvironmentVariableTarget]::Machine)
 }
 
-winfetch
+#winfetch
 
 $ENV:STARSHIP_CONFIG = "$HOME\.config\starship\starship.toml"
 $ENV:STARSHIP_DISTRO = "  eyes"
@@ -22,8 +22,10 @@ function flushdns {
 # Navigation Shortcuts
 function desktop { Set-Location -Path $HOME\Desktop }
 function docs { Set-Location -Path $HOME\Documents }
-function repos { Set-Location -Path "C:\Users\eyes\Code\repos" }
 function .config { Set-Location -Path "C:\Users\eyes\.config" }
+function code { Set-Location -Path "C:\Users\eyes\Development\Code" }
+function repos { Set-Location -Path "C:\Users\eyes\Development\repos" }
+function sites { Set-Location -Path "C:\Users\eyes\Local Sites" }
 
 # Enhanced Listing
 function ll { Get-ChildItem -Path . -Force -Hidden | Format-Table -AutoSize }
@@ -33,8 +35,7 @@ Set-Alias ls exa
 Set-Alias mkdir New-MultiDir
 Set-Alias ping Test-Connection
 Set-Alias ifconfig Get-NetIPAddress
-Set-Alias vim nvim
-Set-Alias code Open-FzfFile
+Set-Alias vim Open-FzfFile
 Set-Alias debian debian.exe
 
 # nvims
