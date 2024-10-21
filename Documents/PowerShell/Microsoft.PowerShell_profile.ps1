@@ -5,10 +5,26 @@ if ([bool]([System.Security.Principal.WindowsIdentity]::GetCurrent()).IsSystem) 
 
 #winfetch
 
-$ENV:STARSHIP_CONFIG = "$HOME\.config\starship\starship.toml"
-$ENV:STARSHIP_DISTRO = "  eyes"
-Invoke-Expression (&starship init powershell)
+Import-Module -Name Terminal-Icons
+oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH\p10k.toml" | Invoke-Expression
+#$ENV:STARSHIP_CONFIG = "$HOME\.config\starship\starship.toml"
+#$ENV:STARSHIP_DISTRO = "  eyes"
+#Invoke-Expression (&starship init powershell)
 $env:BAT_THEME = 'Nord'
+
+# Shows navigable menu of all options when hitting Tab
+Set-PSReadlineKeyHandler -Key Tab -Function MenuComplete
+
+# Autocompletion for arrow keys
+Set-PSReadlineKeyHandler -Key UpArrow -Function HistorySearchBackward
+Set-PSReadlineKeyHandler -Key DownArrow -Function HistorySearchForward
+
+# git
+function github {
+    git add .
+    git commit -m "$args"
+    git push
+}
 
 # Quick Access to System Information
 function sysinfo { Get-ComputerInfo }
@@ -21,17 +37,17 @@ function flushdns {
 
 # Navigation Shortcuts
 function desktop { Set-Location -Path $HOME\Desktop }
+function downloads { Set-Location -Path $HOME\Downloads }
 function docs { Set-Location -Path $HOME\Documents }
-function .config { Set-Location -Path "C:\Users\eyes\.config" }
-function code { Set-Location -Path "C:\Users\eyes\Development\Code" }
-function repos { Set-Location -Path "C:\Users\eyes\Development\repos" }
-function sites { Set-Location -Path "C:\Users\eyes\Local Sites" }
+function .config { Set-Location -Path "$HOME\.config" }
+function code { Set-Location -Path "$HOME\Code" }
+function repos { Set-Location -Path "$HOME\Code\repos" }
+function sites { Set-Location -Path "$HOME\Local Sites" }
 
 # Enhanced Listing
 function ll { Get-ChildItem -Path . -Force -Hidden | Format-Table -AutoSize }
 
 # Aliasis
-Set-Alias ls exa
 Set-Alias mkdir New-MultiDir
 Set-Alias ping Test-Connection
 Set-Alias ifconfig Get-NetIPAddress
@@ -41,7 +57,7 @@ Set-Alias debian debian.exe
 # nvims
 function nvims()
 {
-  $items = "Nvim", "AstroNvim", "LazyVim", "NvChad"
+  $items = "AstroNvim", "LazyVim", "NvChad", "Nvim"
   $config = $items | fzf --prompt=" Neovim Config " --height=~50% --layout=reverse --border --exit-0
 
   if ([string]::IsNullOrEmpty($config))
@@ -77,6 +93,12 @@ function ip {
 # which
 function which($name) {
     Get-Command $name | Select-Object -ExpandProperty Definition
+}
+
+# whichdir
+function whichdir($name) {
+    $directory = Split-Path -Parent (Get-Command $name | Select-Object -ExpandProperty Definition)
+    return $directory
 }
 
 # sed
