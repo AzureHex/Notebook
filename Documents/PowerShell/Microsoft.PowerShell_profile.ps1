@@ -45,7 +45,6 @@ function cd {
 }
 
 # fzf-file-manager
-
 function fzf-file-manager {
     param (
         [string]$Path = "."
