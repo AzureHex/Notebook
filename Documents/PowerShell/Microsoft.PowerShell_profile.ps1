@@ -3,13 +3,14 @@ if ([bool]([System.Security.Principal.WindowsIdentity]::GetCurrent()).IsSystem) 
     [System.Environment]::SetEnvironmentVariable('POWERSHELL_TELEMETRY_OPTOUT', 'true', [System.EnvironmentVariableTarget]::Machine)
 }
 
-winfetch
+#winfetch
 
 Import-Module -Name Terminal-Icons
 oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH\p10k.toml" | Invoke-Expression
 #$ENV:STARSHIP_CONFIG = "$HOME\.config\starship\starship.toml"
 #$ENV:STARSHIP_DISTRO = "  eyes"
 #Invoke-Expression (&starship init powershell)
+Invoke-Expression (& { (zoxide init powershell | Out-String) })
 $env:BAT_THEME = 'Nord'
 
 # Shows navigable menu of all options when hitting Tab
@@ -19,21 +20,12 @@ Set-PSReadlineKeyHandler -Key Tab -Function MenuComplete
 Set-PSReadlineKeyHandler -Key UpArrow -Function HistorySearchBackward
 Set-PSReadlineKeyHandler -Key DownArrow -Function HistorySearchForward
 
-# git
-function github {
-    git add .
-    git commit -m "$args"
-    git push
-}
-
-# Quick Access to System Information
-function sysinfo { Get-ComputerInfo }
-
-# Networking Utilities
-function flushdns {
-	Clear-DnsClientCache
-	Write-Host "DNS has been flushed"
-}
+# Aliasis
+Set-Alias mkdir New-MultiDir
+Set-Alias ping Test-Connection
+Set-Alias ifconfig Get-NetIPAddress
+Set-Alias fzf-history Show-HistoryPopup
+Set-Alias debian debian.exe
 
 # Navigation Shortcuts
 function desktop { Set-Location -Path $HOME\Desktop }
@@ -44,20 +36,68 @@ function code { Set-Location -Path "$HOME\Code" }
 function repos { Set-Location -Path "$HOME\Code\repos" }
 function sites { Set-Location -Path "$HOME\Local Sites" }
 
-# Enhanced Listing
-function ll { Get-ChildItem -Path . -Force -Hidden | Format-Table -AutoSize }
+# Hidden Listing
+function la { Get-ChildItem -Path . -Force -Hidden | Format-Table -AutoSize }
 
-# Aliasis
-Set-Alias mkdir New-MultiDir
-Set-Alias ping Test-Connection
-Set-Alias ifconfig Get-NetIPAddress
-Set-Alias vim Open-FzfFile
-Set-Alias debian debian.exe
+# cd
+function cd {
+    z "$@"
+}
+
+# fzf-file-manager
+
+function fzf-file-manager {
+    param (
+        [string]$Path = "."
+    )
+
+    # Get files and pipe to fzf with bat preview
+    $selectedFile = Get-ChildItem -Path $Path -File -Recurse | 
+                    Select-Object -ExpandProperty FullName | 
+                    fzf --preview 'bat --style=numbers --color=always {}' --preview-window=right:50%:wrap --select-1 --exit-0
+
+    # Check if a file was selected
+    if ($selectedFile) {
+        # Open the selected file in nano
+        # Make sure nano is available in your PATH or use another editor
+        try {
+            nano $selectedFile
+        } catch {
+            Write-Host "Failed to open file in nano. Please ensure nano is installed."
+        }
+    } else {
+        Write-Host "No file selected."
+    }
+}
+
+# tree
+function tree {
+    param (
+        [string]$Path = "."
+    )
+    cmd /c "tree $Path /f"
+}
+
+# fzf-history
+function Show-HistoryPopup {
+    # Get the last 30 commands from history
+    $history = Get-History | Select-Object -Last 30 -ExpandProperty CommandLine
+    # Use fzf to select a command
+    $selectedCommand = $history | fzf --height 70% --reverse --no-multi --tac
+    if ($selectedCommand) {
+        Invoke-Expression $selectedCommand
+    }
+}
+
+# vim
+function vim {
+    Start-Process "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Neovim\Neovim.lnk"
+}
 
 # nvims
 function nvims()
 {
-  $items = "AstroNvim", "LazyVim", "NvChad", "Nvim"
+  $items = "AstroNvim", "LazyVim", "NvChad"
   $config = $items | fzf --prompt=" Neovim Config " --height=~50% --layout=reverse --border --exit-0
 
   if ([string]::IsNullOrEmpty($config))
@@ -75,19 +115,29 @@ function nvims()
   nvim $args
 }
 
-# Public IP
-function Get-PubIP { (Invoke-WebRequest http://ifconfig.me/ip).Content }
-
-# IP Address Command
-function ip {
-    param (
-        [string]$a
-    )
-    if ($a -eq 'a') {
-        Get-NetIPAddress
-    } else {
-        Write-Host "Unknown option: $a"
+# fzf-nvim
+function fzf-nvim {
+    $file = fzf --height 100% --preview 'bat --style=numbers --color=always {}'
+    if ($file) {
+        $nvimPath = "C:\Users\eyes\scoop\shims\nvim.exe"  # Path to Neovim
+        & $nvimPath $file
     }
+}
+
+# fzf-nano
+function fzf-nano {
+    $file = fzf --height 100% --preview 'bat --style=numbers --color=always {}'
+    if ($file) {
+        $nanoPath = "C:\Users\eyes\scoop\shims\nano.exe"  # Path to nano
+        & $nanoPath $file
+    }
+}
+
+# git
+function github {
+    git add .
+    git commit -m "$args"
+    git push
 }
 
 # which
@@ -140,25 +190,6 @@ function New-MultiDir {
     }
 }
 
-# vim
-function vim {
-    Start-Process "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Neovim\Neovim.lnk"
-}
-
-# fzf-code
-function Open-FzfFile {
-    # Search for all files in the current directory and its subdirectories
-    $files = Get-ChildItem -Recurse -File | Select-Object -ExpandProperty FullName
-
-    # Use fzf to let the user select a file
-    $selectedFile = $files | fzf
-
-    # Open the selected file in nvim
-    if ($selectedFile) {
-        nvim $selectedFile
-    }
-}
-
 # unzip
 function unzip ($file) {
     Write-Output("Extracting", $file, "to", $pwd)
@@ -171,3 +202,26 @@ function mpv {
     & "C:\Users\eyes\scoop\apps\mpv\0.38.0\mpv.exe" @args
 }
 
+# Quick Access to System Information
+function sysinfo { Get-ComputerInfo }
+
+# Networking Utilities
+function flushdns {
+	Clear-DnsClientCache
+	Write-Host "DNS has been flushed"
+}
+
+# Public IP
+function Get-PubIP { (Invoke-WebRequest http://ifconfig.me/ip).Content }
+
+# IP Address Command
+function ip {
+    param (
+        [string]$a
+    )
+    if ($a -eq 'a') {
+        Get-NetIPAddress
+    } else {
+        Write-Host "Unknown option: $a"
+    }
+}
