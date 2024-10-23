@@ -1,7 +1,5 @@
-# Set the execution policy to RemoteSigned for the current user
-Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser -Force
-
-# Install Scoop using Invoke-RestMethod
+# Installing Scoop
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
 
 # Add the extras bucket
