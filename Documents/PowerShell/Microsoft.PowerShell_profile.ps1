@@ -47,17 +47,6 @@ Function eza {
     & 'C:\Users\eyes\scoop\shims\eza.exe' -a -h -m -U --color=auto --icons=auto --git-ignore  $Args
 }
 
-# Disable the built-in cd command
-function cd { }
-
-# Create an alias for z to call cd
-function z {
-    param (
-        [string]$path
-    )
-    Set-Location $path
-}
-
 # fzf-file-manager
 
 function fzf-file-manager {
