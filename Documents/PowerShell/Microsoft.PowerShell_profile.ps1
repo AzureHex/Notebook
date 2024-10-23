@@ -39,12 +39,27 @@ function sites { Set-Location -Path "$HOME\Local Sites" }
 # Hidden Listing
 function la { Get-ChildItem -Path . -Force -Hidden | Format-Table -AutoSize }
 
-# cd
-function cd {
-    z "$@"
+# eza
+Function eza {
+    param (
+        [string[]]$Args
+    )
+    & 'C:\Users\eyes\scoop\shims\eza.exe' -a -h -m -U --color=auto --icons=auto --git-ignore  $Args
+}
+
+# Disable the built-in cd command
+function cd { }
+
+# Create an alias for z to call cd
+function z {
+    param (
+        [string]$path
+    )
+    Set-Location $path
 }
 
 # fzf-file-manager
+
 function fzf-file-manager {
     param (
         [string]$Path = "."
@@ -70,11 +85,11 @@ function fzf-file-manager {
 }
 
 # tree
-function tree {
+Function tree {
     param (
-        [string]$Path = "."
+        [string[]]$Args
     )
-    cmd /c "tree $Path /f"
+    & 'C:\Users\eyes\scoop\shims\eza.exe' -a --color=auto --icons=auto -T --git-ignore  $Args
 }
 
 # fzf-history
