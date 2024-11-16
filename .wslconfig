@@ -1,0 +1,7 @@
+[wsl2]
+memory=4294967296  # Limit the memory
+processors=2  # Limit the number of processors
+swap=1073741824  # Swap file size
+localhostForwarding=true  # Forward localhost connections
+
+defaultVhdSize=64424509440
