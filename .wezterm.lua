@@ -38,7 +38,7 @@ config.command_palette_bg_color = "#44475a" -- Customize background color
 config.keys = {
 	{ key = "T", mods = "CTRL|SHIFT", action = wezterm.action({ SendString = "" }) },
 	{ mods = "LEADER", key = "c", action = wezterm.action.SpawnTab("CurrentPaneDomain") },
-	{ mods = "LEADER", key = "x", action = wezterm.action.CloseCurrentPane({ confirm = true }) },
+	{ mods = "LEADER", key = "x", action = wezterm.action.CloseCurrentPane({ confirm = false }) },
 	{ mods = "LEADER", key = "b", action = wezterm.action.ActivateTabRelative(-1) },
 	{ mods = "LEADER", key = "n", action = wezterm.action.ActivateTabRelative(2) },
 	{ mods = "LEADER", key = "|", action = wezterm.action.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
