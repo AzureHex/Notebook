@@ -26,7 +26,7 @@ config.notification_handling = "AlwaysShow"
 config.show_update_window = true
 config.term = "xterm-256color"
 config.window_decorations = "RESIZE" -- RESIZE, INTEGRATED_BUTTONS|RESIZE, TITLE, NONE
---config.window_background_opacity = 0.2
+--config.window_background_opacity = 0.99
 --config.win32_system_backdrop = "Acrylic" -- "Acrylic" or "Mica"
 
 -- Customize the command palette font size and appearance
@@ -98,3 +98,4 @@ config.colors = {
 }
 
 return config
+
