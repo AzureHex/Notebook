@@ -80,9 +80,9 @@ end)
 
 -- Window padding configuration
 config.window_padding = {
-	left = 4,
-	right = 0,
-	top = 4,
+	left = 11,
+	right = 8,
+	top = 11,
 	bottom = 0,
 }
 
@@ -98,4 +98,3 @@ config.colors = {
 }
 
 return config
-
