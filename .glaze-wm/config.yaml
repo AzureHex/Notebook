@@ -16,7 +16,7 @@ general:
   floating_window_move_amount: "5%"
 
   # Whether to center new floating windows.
-  center_new_floating_windows: true
+  #center_new_floating_windows: true
 
   # *Strongly* recommended to set to 'false'. Whether to globally enable/disable
   # window transition animations (on minimize, close, etc). Set to 'unchanged'
@@ -171,8 +171,8 @@ keybindings:
     binding: "Alt+V"
 
   # Change focus between floating / tiling windows.
-  - command: "focus mode toggle"
-    binding: "Alt+Shift+Space"
+  #  - command: "focus mode toggle"
+    #    binding: "Alt+Shift+Space"
 
   # Change the focused window to be floating / tiling.
   - command: "toggle floating"
