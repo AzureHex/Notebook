@@ -7,7 +7,15 @@ return {
                 icons_enabled = true,
                 component_separators = '|',
                 section_separators = '',
-            }
+            },
+            sections = {
+                lualine_b = {
+                    {
+                        'branch',
+                        icon = '',
+                    },
+                },
+            },
         })
     end
 }
