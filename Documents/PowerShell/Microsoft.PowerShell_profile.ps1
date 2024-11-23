@@ -64,32 +64,6 @@ function lta4 {
     eza -lT --git-ignore --level=4 --icons
 }
 
-# fzf-file-manager
-
-function fzf-file-manager {
-    param (
-        [string]$Path = "."
-    )
-
-    # Get files and pipe to fzf with bat preview
-    $selectedFile = Get-ChildItem -Path $Path -File -Recurse |
-                    Select-Object -ExpandProperty FullName |
-                    fzf --preview 'bat --style=numbers --color=always {}' --preview-window=right:50%:wrap --select-1 --exit-0
-
-    # Check if a file was selected
-    if ($selectedFile) {
-        # Open the selected file in nano
-        # Make sure nano is available in your PATH or use another editor
-        try {
-            nano $selectedFile
-        } catch {
-            Write-Host "Failed to open file in nano. Please ensure nano is installed."
-        }
-    } else {
-        Write-Host "No file selected."
-    }
-}
-
 # tree
 Function tree {
     param (
@@ -115,25 +89,25 @@ function vim {
 }
 
 # nvims
-function nvims()
-{
-  $items = "LazyVim", "AstroNvim", "Nvim", "NvChad"
-  $config = $items | fzf --prompt=" Neovim Config " --height=~50% --layout=reverse --border --exit-0
-
-  if ([string]::IsNullOrEmpty($config))
-  {
-    Write-Output "Nothing selected"
-    break
-  }
-
-  if ($config -eq "default")
-  {
-    $config = ""
-  }
-
-  $env:NVIM_APPNAME=$config
-  nvim $args
-}
+#function nvims()
+#{
+#  $items = "LazyVim", "AstroNvim", "Nvim", "NvChad"
+#  $config = $items | fzf --prompt=" Neovim Config " --height=~50% --layout=reverse --border --exit-0
+#
+#  if ([string]::IsNullOrEmpty($config))
+#  {
+#    Write-Output "Nothing selected"
+#    break
+#  }
+#
+#  if ($config -eq "default")
+#  {
+#    $config = ""
+#  }
+#
+#  $env:NVIM_APPNAME=$config
+#  nvim $args
+#}
 
 # fzf-nvim
 function fzf-nvim {
@@ -142,22 +116,6 @@ function fzf-nvim {
         $nvimPath = "C:\Users\eyes\scoop\shims\nvim.exe"  # Path to Neovim
         & $nvimPath $file
     }
-}
-
-# fzf-nano
-function fzf-nano {
-    $file = fzf --height 100% --preview 'bat --style=numbers --color=always {}'
-    if ($file) {
-        $nanoPath = "C:\Users\eyes\scoop\shims\nano.exe"  # Path to nano
-        & $nanoPath $file
-    }
-}
-
-# git
-function github {
-    git add .
-    git commit -m "$args"
-    git push
 }
 
 # which
