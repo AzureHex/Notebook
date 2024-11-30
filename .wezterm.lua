@@ -43,7 +43,7 @@ config.keys = {
 	{ mods = "LEADER", key = "n", action = wezterm.action.ActivateTabRelative(2) },
 	{ mods = "LEADER", key = "|", action = wezterm.action.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
 	{ mods = "LEADER|SHIFT", key = "|", action = wezterm.action.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
-	{ mods = "LEADER", key = "-", action = wezterm.action.SplitVertical({ domain = "CurrentPaneDomain" }) },
+	{ mods = "LEADER|SHIFT", key = "_", action = wezterm.action.SplitVertical({ domain = "CurrentPaneDomain" }) },
 	{ mods = "LEADER", key = "h", action = wezterm.action.ActivatePaneDirection("Left") },
 	{ mods = "LEADER", key = "j", action = wezterm.action.ActivatePaneDirection("Down") },
 	{ mods = "LEADER", key = "k", action = wezterm.action.ActivatePaneDirection("Up") },
@@ -81,7 +81,7 @@ end)
 -- Window padding configuration
 config.window_padding = {
 	left = 11,
-	right = 8,
+	right = 11,
 	top = 11,
 	bottom = 0,
 }
