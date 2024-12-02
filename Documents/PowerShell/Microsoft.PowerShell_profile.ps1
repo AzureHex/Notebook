@@ -45,6 +45,7 @@ function docs { Set-Location -Path $HOME\Documents }
 function .config { Set-Location -Path "$HOME\.config" }
 function code { Set-Location -Path "$HOME\Documents\Code" }
 function repos { Set-Location -Path "$HOME\Documents\Code\repos" }
+function Developer {Set-Location -Path "$HOME\Developer"}
 function notes { Set-Location -Path "$HOME\Documents\Notes" }
 function sites { Set-Location -Path "$HOME\Documents\Local Sites" }
 
@@ -203,3 +204,9 @@ function ip {
         Write-Host "Unknown option: $a"
     }
 }
+
+# NixOS
+function NixOS {
+    wsl -d NixOS
+}
+
