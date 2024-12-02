@@ -43,9 +43,8 @@ function desktop { Set-Location -Path $HOME\Desktop }
 function downloads { Set-Location -Path $HOME\Downloads }
 function docs { Set-Location -Path $HOME\Documents }
 function .config { Set-Location -Path "$HOME\.config" }
-function code { Set-Location -Path "$HOME\Documents\Code" }
-function repos { Set-Location -Path "$HOME\Documents\Code\repos" }
-function Developer {Set-Location -Path "$HOME\Developer"}
+function Dev {Set-Location -Path "$HOME\Development"}
+function repos { Set-Location -Path "$HOME\Development\repos" }
 function notes { Set-Location -Path "$HOME\Documents\Notes" }
 function sites { Set-Location -Path "$HOME\Documents\Local Sites" }
 
@@ -53,11 +52,11 @@ function sites { Set-Location -Path "$HOME\Documents\Local Sites" }
 function la { Get-ChildItem -Path . -Force -Hidden | Format-Table -AutoSize }
 
 # eza
-Function eza {
+Function ll {
     param (
         [string[]]$Args
     )
-    & 'C:\Users\eyes\scoop\shims\eza.exe' -a -h -m -U --color=auto --icons=auto --git-ignore  $Args
+    & 'C:\Users\eyes\scoop\shims\eza.exe' -l -a --color=auto --icons=auto --git-ignore  $Args
 }
 
 # eza tree list
