@@ -18,7 +18,7 @@ config.tab_and_split_indices_are_zero_based = false
 config.allow_win32_input_mode = true
 config.default_prog = { "pwsh.exe" }
 config.initial_cols = 135
-config.initial_rows = 33
+config.initial_rows = 32
 config.default_cursor_style = "BlinkingBar"
 config.audible_bell = "SystemBeep"
 config.adjust_window_size_when_changing_font_size = true
@@ -83,7 +83,7 @@ config.window_padding = {
 	left = 11,
 	right = 11,
 	top = 11,
-	bottom = 0,
+	bottom = 8,
 }
 
 -- Custom colors
