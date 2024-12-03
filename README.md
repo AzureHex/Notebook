@@ -45,9 +45,7 @@ Add-WUServiceManager -MicrosoftUpdate
 git clone --depth 1 https://github.com/AstroNvim/template $env:LOCALAPPDATA\AstroVim
 git clone https://github.com/LazyVim/starter $env:LOCALAPPDATA\LazyVim
 git clone https://github.com/NvChad/starter $ENV:USERPROFILE\AppData\Local\NvChad
-```
 
-```sh
 # Installing Zen Browser | Optimized Version
 winget install --id Zen-Team.Zen-Browser.Optimized
 ```
