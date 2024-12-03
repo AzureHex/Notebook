@@ -28,6 +28,14 @@ return {
                 enforce_regular_tabs = false, -- Don't enforce regular tabs
             }
         })
+
+        -- Key mappings for switching tabs
+        vim.api.nvim_set_keymap('n', '<Tab>', ':BufferLineCycleNext<CR>', { noremap = true, silent = true })
+        vim.api.nvim_set_keymap('n', '<S-Tab>', ':BufferLineCyclePrev<CR>', { noremap = true, silent = true })
+
+        -- Key mappings for reordering tabs
+        vim.api.nvim_set_keymap('n', '<Leader>bn', ':BufferLineMoveNext<CR>', { noremap = true, silent = true })  -- Move buffer to the right
+        vim.api.nvim_set_keymap('n', '<Leader>bp', ':BufferLineMovePrev<CR>', { noremap = true, silent = true })  -- Move buffer to the left
     end
 }
 
