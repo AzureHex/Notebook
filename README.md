@@ -10,15 +10,6 @@ Install-WindowsUpdate -MicrosoftUpdate -AcceptAll -AutoReboot | Out-File "C:\($e
 ---
 
 ```sh
-# Installing Nerd Fonts
-wget -P ~/.local/share/fonts/JetBrainsMono https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/JetBrainsMono.zip
-cd ~/.local/share/fonts/JetBrainsMono
-unzip JetBrainsMono.zip
-rm JetBrainsMono.zip
-fc-cache -fv
-```
-
-```sh
 # Installing Scoop
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
@@ -26,7 +17,12 @@ Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
 # Add the extras bucket
 scoop bucket add extras
 scoop bucket add nerd-fonts
+
+# Install Nerd Fonts
 scoop install nerd-fonts/JetBrains-Mono
+scoop install nerd-fonts/JetBrainsMono-NF
+scoop install nerd-fonts/Iosevka-NF
+scoop install nerd-fonts/ComicShannsMono-NF
 
 # Install the specified applications from Scoop
 scoop install 7zip adb ani-cli aria2 bat btop cacert chafa curl delta eza fd ffmpeg file fnm fzf gcc git glazewm grep googlechrome grep imagemagick innounp lazygit less llvm localsend mingw mpv msys2 nano neovim nu obsidian ollama openssl raspberry-pi-imager ripgrep sed starship tailscale tree tgpt tldr vcredist2022 winnfsd wezterm wget winfetch yazi yt-dlp zoxide
@@ -50,12 +46,17 @@ git clone --depth 1 https://github.com/AstroNvim/template $env:LOCALAPPDATA\Astr
 git clone https://github.com/LazyVim/starter $env:LOCALAPPDATA\LazyVim
 git clone https://github.com/NvChad/starter $ENV:USERPROFILE\AppData\Local\NvChad
 ```
+
+```sh
+# Installing Zen Browser | Optimized Version
+winget install --id Zen-Team.Zen-Browser.Optimized
+```
+
 ## Manual Install
 ### Apps
 1. Apple Devices
 2. Office 2019 Home & Student
 3. Scan
-4. Zen
 
 ### Portable Apps
 1. ExifCleaner
