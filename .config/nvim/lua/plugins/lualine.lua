@@ -11,8 +11,8 @@ return {
             sections = {
                 lualine_b = {
                     {
-                        'branch',
-                        icon = '',
+                        'branch',  -- Keep the branch component
+                        icon = '',  -- Custom Git icon (change this to any icon you prefer)
                     },
                 },
             },

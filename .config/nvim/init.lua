@@ -11,16 +11,12 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+vim.opt.scrolloff = 10
 vim.opt.cursorline = true
 vim.opt.cursorlineopt = "number"
 vim.opt.guicursor = "n-v-c:ver25-blinkon1,i-ci-ve:ver25-blinkon1"
 --vim.opt.number = true
 --vim.opt.fillchars:append("eob: ")
-
--- Neovide
-vim.opt.termguicolors = true
-vim.g.neovide_transparency = 0.9
-vim.g.neovide_cursor_smooth_blink = true
 
 require("vim-options")
 require("lazy").setup("plugins")
