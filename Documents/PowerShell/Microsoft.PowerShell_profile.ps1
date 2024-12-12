@@ -118,7 +118,7 @@ function fzf-nvim {
     }
 }
 
-# Ollama
+# ollama
 function ollama-serve {
     Start-Process -FilePath "ollama" -ArgumentList "serve" -NoNewWindow -RedirectStandardOutput "C:\Temp\ollama_output.log" -RedirectStandardError "C:\Temp\ollama_error.log"
 }
