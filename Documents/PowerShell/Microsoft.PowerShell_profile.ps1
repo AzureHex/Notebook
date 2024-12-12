@@ -118,6 +118,15 @@ function fzf-nvim {
     }
 }
 
+# Ollama
+function ollama-serve {
+    Start-Process -FilePath "ollama" -ArgumentList "serve" -NoNewWindow -RedirectStandardOutput "C:\Temp\ollama_output.log" -RedirectStandardError "C:\Temp\ollama_error.log"
+}
+
+function ollama-kill {
+    Stop-Process -Name "ollama" -Force -ErrorAction SilentlyContinue
+}
+
 # which
 function which($name) {
     Get-Command $name | Select-Object -ExpandProperty Definition
