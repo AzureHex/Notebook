@@ -1,5 +1,5 @@
 format = """
-$os \
+$os\
 $directory\
 $git_branch\
 $git_status\
@@ -23,7 +23,7 @@ add_newline = true
 palette = 'space' # onedark, catppuccin_mocha, nord
 
 [os]
-format = '[$symbol](blue)'
+format = '[$symbol](white)'
 disabled = false
 
 [os.symbols]
