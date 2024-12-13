@@ -31,12 +31,16 @@ Set-PSReadlineKeyHandler -Key Tab -Function MenuComplete
 Set-PSReadlineKeyHandler -Key UpArrow -Function HistorySearchBackward
 Set-PSReadlineKeyHandler -Key DownArrow -Function HistorySearchForward
 
+# Disable default cd
+Remove-Item Alias:\cd -ErrorAction SilentlyContinue
+
 # Aliasis
 Set-Alias mkdir New-MultiDir
 Set-Alias ping Test-Connection
 Set-Alias ifconfig Get-NetIPAddress
 Set-Alias fzf-history Show-HistoryPopup
 Set-Alias debian debian.exe
+Set-Alias cd z
 
 # Navigation Shortcuts
 function desktop { Set-Location -Path $HOME\Desktop }
