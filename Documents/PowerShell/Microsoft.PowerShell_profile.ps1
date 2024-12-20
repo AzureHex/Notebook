@@ -41,7 +41,7 @@ Set-Alias ping Test-Connection
 Set-Alias ifconfig Get-NetIPAddress
 Set-Alias fzf-history Show-HistoryPopup
 Set-Alias doom ~/.local/bin/doom.ps1
-set-Alias debian debian.exe
+Set-Alias debian debian.exe
 
 # Navigation Shortcuts
 function desktop { Set-Location -Path $HOME\Desktop }
@@ -55,6 +55,10 @@ function sites { Set-Location -Path "$HOME\Documents\Local Sites" }
 
 # Hidden Listing
 function la { Get-ChildItem -Path . -Force -Hidden | Format-Table -AutoSize }
+
+function gen {
+    & "$env:USERPROFILE\scoop\shims\tgpt.exe" -i
+}
 
 # eza
 Function ll {
