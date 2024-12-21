@@ -56,10 +56,6 @@ function sites { Set-Location -Path "$HOME\Documents\Local Sites" }
 # Hidden Listing
 function la { Get-ChildItem -Path . -Force -Hidden | Format-Table -AutoSize }
 
-function gen {
-    & "$env:USERPROFILE\scoop\shims\tgpt.exe" -i
-}
-
 # eza
 Function ll {
     param (
@@ -161,6 +157,11 @@ function grep($regex, $dir) {
     $input | select-string $regex
 }
 
+# ripgrep
+function rg {
+    rg -i
+}
+
 # touch
 function touch {
     param (
@@ -220,6 +221,11 @@ function ip {
     } else {
         Write-Host "Unknown option: $a"
     }
+}
+
+# tgpt
+function gen {
+    & "$env:USERPROFILE\scoop\shims\tgpt.exe" -i
 }
 
 # NixOS
