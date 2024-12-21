@@ -88,11 +88,6 @@ function Show-HistoryPopup {
     }
 }
 
-# vim
-function vim {
-    Start-Process "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Neovim\Neovim.lnk"
-}
-
 # nvims
 #function nvims()
 #{
