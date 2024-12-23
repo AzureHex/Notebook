@@ -208,6 +208,9 @@ function fzf-nvim {
 #  nvim $args
 #}
 
+# fnm
+fnm env --use-on-cd | Out-String | Invoke-Expression
+
 # tgpt
 function gen {
     & "$env:USERPROFILE\scoop\shims\tgpt.exe" -i
@@ -221,9 +224,6 @@ function ollama-serve {
 function ollama-kill {
     Stop-Process -Name "ollama" -Force -ErrorAction SilentlyContinue
 }
-
-# fnm
-fnm env --use-on-cd | Out-String | Invoke-Expression
 
 # NixOS
 function NixOS {
