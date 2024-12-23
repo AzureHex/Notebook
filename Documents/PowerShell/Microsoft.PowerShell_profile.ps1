@@ -18,20 +18,18 @@ Enable-TransientPrompt
 #$ENV:STARSHIP_DISTRO = "  eyes"
 #oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH\p10k.toml" | Invoke-Expression
 
-Invoke-Expression (& { (zoxide init powershell | Out-String) })
+$env:PATH += ";C:\Users\eyes\scoop\shims"
 $env:FZF_DEFAULT_OPTS="--color=bg+:-1,bg:-1,fg+:#ffffff,fg:#cccccc,gutter:-1"
 $env:BAT_THEME = 'Nord'
 
-# Keybinds
+# Navkeys
 Set-PSReadlineKeyHandler -Key Tab -Function MenuComplete
 Set-PSReadlineKeyHandler -Key UpArrow -Function HistorySearchBackward
 Set-PSReadlineKeyHandler -Key DownArrow -Function HistorySearchForward
 
-# Disable system cd
-Remove-Item Alias:\cd -ErrorAction SilentlyContinue
+Invoke-Expression (& { (zoxide init powershell | Out-String) })
 
 # Aliasis
-Set-Alias cd z
 Set-Alias mkdir New-MultiDir
 Set-Alias ping Test-Connection
 Set-Alias ifconfig Get-NetIPAddress
@@ -51,77 +49,6 @@ function sites { Set-Location -Path "$HOME\Documents\Local Sites" }
 
 # Hidden Listing
 function la { Get-ChildItem -Path . -Force -Hidden | Format-Table -AutoSize }
-
-# eza
-Function ll {
-    param (
-        [string[]]$Args
-    )
-    & 'C:\Users\eyes\scoop\shims\eza.exe' -l -a --color=auto --icons=auto --git-ignore  $Args
-}
-
-# eza tree list
-function lta4 {
-    eza -lT --git-ignore --level=4 --icons
-}
-
-# tree
-Function tree {
-    param (
-        [string[]]$Args
-    )
-    & 'C:\Users\eyes\scoop\shims\eza.exe' -a --color=auto --icons=auto -T --git-ignore  $Args
-}
-
-# fzf-history
-function Show-HistoryPopup {
-    # Get the last 30 commands from history
-    $history = Get-History | Select-Object -Last 30 -ExpandProperty CommandLine
-    # Use fzf to select a command
-    $selectedCommand = $history | fzf --height 70% --reverse --no-multi --tac
-    if ($selectedCommand) {
-        Invoke-Expression $selectedCommand
-    }
-}
-
-# nvims
-#function nvims()
-#{
-#  $items = "LazyVim", "AstroNvim", "Nvim", "NvChad"
-#  $config = $items | fzf --prompt=" Neovim Config " --height=~50% --layout=reverse --border --exit-0
-#
-#  if ([string]::IsNullOrEmpty($config))
-#  {
-#    Write-Output "Nothing selected"
-#    break
-#  }
-#
-#  if ($config -eq "default")
-#  {
-#    $config = ""
-#  }
-#
-#  $env:NVIM_APPNAME=$config
-#  nvim $args
-#}
-
-# fzf-nvim
-function fzf-nvim {
-    $file = fzf --height 100% --preview 'bat --style=numbers --color=always {}'
-    if ($file) {
-        $nvimPath = "C:\Users\eyes\scoop\shims\nvim.exe"  # Path to Neovim
-        & $nvimPath $file
-    }
-}
-
-# ollama
-function ollama-serve {
-    Start-Process -FilePath "ollama" -ArgumentList "serve" -NoNewWindow -RedirectStandardOutput "C:\Temp\ollama_output.log" -RedirectStandardError "C:\Temp\ollama_error.log"
-}
-
-function ollama-kill {
-    Stop-Process -Name "ollama" -Force -ErrorAction SilentlyContinue
-}
 
 # which
 function which($name) {
@@ -146,11 +73,6 @@ function grep($regex, $dir) {
         return
     }
     $input | select-string $regex
-}
-
-# ripgrep
-function rg {
-    rg -i
 }
 
 # touch
@@ -185,11 +107,6 @@ function unzip ($file) {
     Expand-Archive -Path $fullFile -DestinationPath $pwd
 }
 
-# mpv
-function mpv {
-    & "C:\Users\eyes\scoop\apps\mpv\0.38.0\mpv.exe" @args
-}
-
 # Quick Access to System Information
 function sysinfo { Get-ComputerInfo }
 
@@ -214,16 +131,106 @@ function ip {
     }
 }
 
+# eza
+Function ll {
+    param (
+        [string[]]$Args
+    )
+    & 'C:\Users\eyes\scoop\shims\eza.exe' -l -a --color=auto --icons=auto --git-ignore  $Args
+}
+
+# tree
+Function tree {
+    param (
+        [string[]]$Args
+    )
+    & 'C:\Users\eyes\scoop\shims\eza.exe' -a --color=auto --icons=auto -T --git-ignore  $Args
+}
+
+# eza tree list
+function lta4 {
+    eza -lT --git-ignore --level=4 --icons
+}
+
+# ripgrep
+function rg {
+    rg -i
+}
+
+# fzf-history
+function Show-HistoryPopup {
+    # Get the last 30 commands from history
+    $history = Get-History | Select-Object -Last 30 -ExpandProperty CommandLine
+    # Use fzf to select a command
+    $selectedCommand = $history | fzf --height 70% --reverse --no-multi --tac
+    if ($selectedCommand) {
+        Invoke-Expression $selectedCommand
+    }
+}
+
+function y {
+    $tmp = [System.IO.Path]::GetTempFileName()
+    yazi $args --cwd-file="$tmp"
+    $cwd = Get-Content -Path $tmp
+    if (-not [String]::IsNullOrEmpty($cwd) -and $cwd -ne $PWD.Path) {
+        Set-Location -LiteralPath $cwd
+    }
+    Remove-Item -Path $tmp
+}
+
+# fzf-nvim
+function fzf-nvim {
+    $file = fzf --height 100% --preview 'bat --style=numbers --color=always {}'
+    if ($file) {
+        $nvimPath = "C:\Users\eyes\scoop\shims\nvim.exe"  # Path to Neovim
+        & $nvimPath $file
+    }
+}
+
+# nvims
+#function nvims()
+#{
+#  $items = "LazyVim", "AstroNvim", "Nvim", "NvChad"
+#  $config = $items | fzf --prompt=" Neovim Config " --height=~50% --layout=reverse --border --exit-0
+#
+#  if ([string]::IsNullOrEmpty($config))
+#  {
+#    Write-Output "Nothing selected"
+#    break
+#  }
+#
+#  if ($config -eq "default")
+#  {
+#    $config = ""
+#  }
+#
+#  $env:NVIM_APPNAME=$config
+#  nvim $args
+#}
+
 # tgpt
 function gen {
     & "$env:USERPROFILE\scoop\shims\tgpt.exe" -i
 }
+
+# ollama
+function ollama-serve {
+    Start-Process -FilePath "ollama" -ArgumentList "serve" -NoNewWindow -RedirectStandardOutput "C:\Temp\ollama_output.log" -RedirectStandardError "C:\Temp\ollama_error.log"
+}
+
+function ollama-kill {
+    Stop-Process -Name "ollama" -Force -ErrorAction SilentlyContinue
+}
+
+# fnm
+fnm env --use-on-cd | Out-String | Invoke-Expression
 
 # NixOS
 function NixOS {
     wsl -d NixOS
 }
 
-# fnm
-fnm env --use-on-cd | Out-String | Invoke-Expression
-
+# mpv
+function mpv {
+    & "C:\Users\eyes\scoop\apps\mpv\0.38.0\mpv.exe" @args
+}
