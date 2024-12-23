@@ -1,9 +1,7 @@
-#opt-out of telemetry before doing anything, only if PowerShell is run as admin
+# Opt-out pwsh telemetry, only as admin
 if ([bool]([System.Security.Principal.WindowsIdentity]::GetCurrent()).IsSystem) {
     [System.Environment]::SetEnvironmentVariable('POWERSHELL_TELEMETRY_OPTOUT', 'true', [System.EnvironmentVariableTarget]::Machine)
 }
-
-#winfetch
 
 Import-Module -Name Terminal-Icons
 
@@ -24,14 +22,12 @@ Invoke-Expression (& { (zoxide init powershell | Out-String) })
 $env:FZF_DEFAULT_OPTS="--color=bg+:-1,bg:-1,fg+:#ffffff,fg:#cccccc,gutter:-1"
 $env:BAT_THEME = 'Nord'
 
-# Shows navigable menu of all options when hitting Tab
+# Keybinds
 Set-PSReadlineKeyHandler -Key Tab -Function MenuComplete
-
-# Autocompletion for arrow keys
 Set-PSReadlineKeyHandler -Key UpArrow -Function HistorySearchBackward
 Set-PSReadlineKeyHandler -Key DownArrow -Function HistorySearchForward
 
-# Disable default cd
+# Disable system cd
 Remove-Item Alias:\cd -ErrorAction SilentlyContinue
 
 # Aliasis
@@ -227,4 +223,7 @@ function gen {
 function NixOS {
     wsl -d NixOS
 }
+
+# fnm
+fnm env --use-on-cd | Out-String | Invoke-Expression
 
