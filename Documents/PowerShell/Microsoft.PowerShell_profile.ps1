@@ -230,6 +230,14 @@ function NixOS {
     wsl -d NixOS
 }
 
+# preview
+function Preview {
+    param (
+        [string]$ImagePath
+    )
+    wezterm imgcat $ImagePath
+}
+
 # mpv
 function mpv {
     & "C:\Users\eyes\scoop\apps\mpv\0.38.0\mpv.exe" @args
