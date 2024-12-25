@@ -74,6 +74,15 @@ function grep($regex, $dir) {
     $input | select-string $regex
 }
 
+# Symbolic Link
+function ln-s {
+    param (
+        [string]$LinkPath,
+        [string]$TargetPath
+    )
+    New-Item -Path $LinkPath -ItemType SymbolicLink -Target $TargetPath
+}
+
 # touch
 function touch {
     param (
@@ -104,15 +113,6 @@ function unzip ($file) {
     Write-Output("Extracting", $file, "to", $pwd)
     $fullFile = Get-ChildItem -Path $pwd -Filter $file | ForEach-Object { $_.FullName }
     Expand-Archive -Path $fullFile -DestinationPath $pwd
-}
-
-# Symbolic Link
-function ln-s {
-    param (
-        [string]$LinkPath,
-        [string]$TargetPath
-    )
-    New-Item -Path $LinkPath -ItemType SymbolicLink -Target $TargetPath
 }
 
 # System Information
