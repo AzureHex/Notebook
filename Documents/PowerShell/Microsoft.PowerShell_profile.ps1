@@ -28,8 +28,6 @@ Set-PSReadlineKeyHandler -Key Tab -Function MenuComplete
 Set-PSReadlineKeyHandler -Key UpArrow -Function HistorySearchBackward
 Set-PSReadlineKeyHandler -Key DownArrow -Function HistorySearchForward
 
-Invoke-Expression (& { (zoxide init powershell | Out-String) })
-
 # Aliasis
 Set-Alias mkdir New-MultiDir
 Set-Alias ping Test-Connection
@@ -253,4 +251,7 @@ function Preview {
 function mpv {
     & "C:\Users\eyes\scoop\apps\mpv\0.38.0\mpv.exe" @args
 }
+
+# Zoxide
+Invoke-Expression (& { (zoxide init --cmd cd powershell | Out-String) })
 
