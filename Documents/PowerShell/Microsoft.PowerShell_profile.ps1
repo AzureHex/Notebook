@@ -19,8 +19,9 @@ Enable-TransientPrompt
 #oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH\p10k.toml" | Invoke-Expression
 
 $env:PATH += ";C:\Users\eyes\scoop\shims"
+$env:EDITOR = "nvim"
 $env:FZF_DEFAULT_OPTS="--color=bg+:-1,bg:-1,fg+:#ffffff,fg:#cccccc,gutter:-1"
-$env:BAT_THEME = 'Nord'
+$env:BAT_THEME = 'Dracula' #Dracula, Nord
 
 # Navkeys
 Set-PSReadlineKeyHandler -Key Tab -Function MenuComplete
@@ -107,7 +108,16 @@ function unzip ($file) {
     Expand-Archive -Path $fullFile -DestinationPath $pwd
 }
 
-# Quick Access to System Information
+# Symbolic Link
+function ln-s {
+    param (
+        [string]$LinkPath,
+        [string]$TargetPath
+    )
+    New-Item -Path $LinkPath -ItemType SymbolicLink -Target $TargetPath
+}
+
+# System Information
 function sysinfo { Get-ComputerInfo }
 
 # Networking Utilities
@@ -168,6 +178,7 @@ function Show-HistoryPopup {
     }
 }
 
+# yazi
 function y {
     $tmp = [System.IO.Path]::GetTempFileName()
     yazi $args --cwd-file="$tmp"
@@ -242,3 +253,4 @@ function Preview {
 function mpv {
     & "C:\Users\eyes\scoop\apps\mpv\0.38.0\mpv.exe" @args
 }
+
