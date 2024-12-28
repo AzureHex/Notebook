@@ -6,9 +6,13 @@ local config = wezterm.config_builder()
 config.leader = { key = " ", mods = "CTRL", timeout_milliseconds = 2000 }
 config.automatically_reload_config = true
 config.check_for_updates = false
+config.window_frame = {
+	font = wezterm.font("JetBrainsMono Nerd Font"),
+}
 config.bold_brightens_ansi_colors = true
 config.font = wezterm.font("JetBrainsMono Nerd Font")
 config.font_size = 14
+config.command_palette_font_size = 18
 config.color_scheme = "Catppuccin Macchiato" -- Catppuccin Frappe | Mocha | Macchiato, duskfox, Dracula (Official)
 config.enable_tab_bar = false
 config.tab_bar_at_bottom = true
