@@ -3,7 +3,67 @@ if ([bool]([System.Security.Principal.WindowsIdentity]::GetCurrent()).IsSystem) 
     [System.Environment]::SetEnvironmentVariable('POWERSHELL_TELEMETRY_OPTOUT', 'true', [System.EnvironmentVariableTarget]::Machine)
 }
 
+Import-Module Catppuccin
+Import-Module PSReadLine
 Import-Module -Name Terminal-Icons
+
+# ColorScheme
+$Flavor = $Catppuccin['Macchiato']
+
+function prompt {
+    $(if (Test-Path variable:/PSDebugContext) { "$($Flavor.Red.Foreground())[DBG]: " }
+      else { '' }) + "$($Flavor.Teal.Foreground())PS $($Flavor.Yellow.Foreground())" + $(Get-Location) +
+        "$($Flavor.Green.Foreground())" + $(if ($NestedPromptLevel -ge 1) { '>>' }) + '> ' + $($PSStyle.Reset)
+}
+
+# PSReadLine Catppuccin
+$Colors = @{
+	# Powershell colours
+	ContinuationPrompt     = $Flavor.Teal.Foreground()
+	Emphasis               = $Flavor.Red.Foreground()
+	Selection              = $Flavor.Surface0.Background()
+	
+	# PSReadLine prediction colours
+	InlinePrediction       = $Flavor.Overlay0.Foreground()
+	ListPrediction         = $Flavor.Mauve.Foreground()
+	ListPredictionSelected = $Flavor.Surface0.Background()
+
+	# Syntax highlighting
+	Command                = $Flavor.Blue.Foreground()
+	Comment                = $Flavor.Overlay0.Foreground()
+	Default                = $Flavor.Text.Foreground()
+	Error                  = $Flavor.Red.Foreground()
+	Keyword                = $Flavor.Mauve.Foreground()
+	Member                 = $Flavor.Rosewater.Foreground()
+	Number                 = $Flavor.Peach.Foreground()
+	Operator               = $Flavor.Sky.Foreground()
+	Parameter              = $Flavor.Pink.Foreground()
+	String                 = $Flavor.Green.Foreground()
+	Type                   = $Flavor.Yellow.Foreground()
+	Variable               = $Flavor.Lavender.Foreground()
+}
+
+# Set the colours
+Set-PSReadLineOption -Colors $Colors
+
+# PowerShell
+$PSStyle.Formatting.Debug = $Flavor.Sky.Foreground()
+$PSStyle.Formatting.Error = $Flavor.Red.Foreground()
+$PSStyle.Formatting.ErrorAccent = $Flavor.Blue.Foreground()
+$PSStyle.Formatting.FormatAccent = $Flavor.Teal.Foreground()
+$PSStyle.Formatting.TableHeader = $Flavor.Rosewater.Foreground()
+$PSStyle.Formatting.Verbose = $Flavor.Yellow.Foreground()
+$PSStyle.Formatting.Warning = $Flavor.Peach.Foreground()
+
+# fzf
+$ENV:FZF_DEFAULT_OPTS = @"
+--color=bg+:$($Flavor.Surface0),bg:$($Flavor.Base),spinner:$($Flavor.Rosewater)
+--color=hl:$($Flavor.Red),fg:$($Flavor.Text),header:$($Flavor.Red)
+--color=info:$($Flavor.Mauve),pointer:$($Flavor.Rosewater),marker:$($Flavor.Rosewater)
+--color=fg+:$($Flavor.Text),prompt:$($Flavor.Mauve),hl+:$($Flavor.Red)
+--color=border:$($Flavor.Surface2)
+--color=bg+:-1,bg:-1,fg+:#ffffff,fg:#cccccc,gutter:-1
+"@
 
 # Starship
 $ENV:STARSHIP_CONFIG = "$HOME\.config\starship\starship.toml"
@@ -19,8 +79,7 @@ Enable-TransientPrompt
 #oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH\p10k.toml" | Invoke-Expression
 
 $env:PATH += ";C:\Users\eyes\scoop\shims"
-$env:EDITOR = "nvim"
-$env:FZF_DEFAULT_OPTS="--color=bg+:-1,bg:-1,fg+:#ffffff,fg:#cccccc,gutter:-1"
+$env:EDITOR = "C:\Users\eyes\scoop\shims\nvim.exe"
 $env:BAT_THEME = 'Dracula' #Dracula, Nord
 
 # Navkeys
