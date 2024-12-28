@@ -80,7 +80,7 @@ Enable-TransientPrompt
 
 $env:PATH += ";C:\Users\eyes\scoop\shims"
 $env:EDITOR = "C:\Users\eyes\scoop\shims\nvim.exe"
-$env:BAT_THEME = 'Dracula' #Dracula, Nord
+$env:BAT_THEME = 'Catppuccin Macchiato' # Catppuccin Macchiato, Dracula, Nord
 
 # Navkeys
 Set-PSReadlineKeyHandler -Key Tab -Function MenuComplete
