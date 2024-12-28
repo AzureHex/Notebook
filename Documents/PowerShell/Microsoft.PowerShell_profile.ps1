@@ -306,6 +306,17 @@ function Preview {
     wezterm imgcat $ImagePath
 }
 
+# weather
+Function Weather {
+    param(
+        [string]$City = 'Agartala'
+    )
+
+    # Use curl to fetch weather information from wttr.in
+    curl "wttr.in/$City?F"
+}
+
+
 # mpv
 function mpv {
     & "C:\Users\eyes\scoop\apps\mpv\0.38.0\mpv.exe" @args
